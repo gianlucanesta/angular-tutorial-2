@@ -2,8 +2,7 @@
 <input type="text" class="form-control" (input)="onUpdateServerName($event)" />
 <input type="text" class="form-control" [(ngModel)]="serverName" />
 
-<!-- {{ serverName }} -->
-
+<p *ngIf="serverCreated">Server was created, {{ serverName }}</p>
 <button
   type="button"
   class="btn btn-primary"
@@ -12,24 +11,9 @@
 >
   Add Server
 </button>
-<p>{{ serverCreationStatus }}</p>
+<!-- <p>{{ serverCreationStatus }}</p> -->
+<!-- <p [innerText]="allowNewServer"></p> -->
+<!-- <p>{{ allowNewServer }}</p> -->
 
-<p [innerText]="allowNewServer"></p>
-<p>{{ allowNewServer }}</p>
-
-<app-server></app-server>
-<app-server></app-server>
-<hr />
-<h4>Exercise</h4>
-<p>Username</p>
-<input type="text" class="form-control" [(ngModel)]="username" />
-<button
-  type="button"
-  class="btn btn-primary"
-  [disabled]="username.length == 0"
-  (click)="onCreateUsername()"
->
-  Add Username
-</button>
-
-<div>{{ username }}</div>
+<!-- <app-server></app-server> -->
+<!-- <app-server></app-server> -->
