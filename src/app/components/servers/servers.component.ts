@@ -32,4 +32,11 @@ export class ServersComponent implements OnInit {
     // console.log(event);
     this.serverName = (<HTMLInputElement>event.target).value;
   }
+
+  displayParagraph = false;
+  log: number[] = [];
+  onClick() {
+    this.displayParagraph = !this.displayParagraph;
+    this.log.push(this.log.length + 1);
+  }
 }

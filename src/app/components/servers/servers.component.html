@@ -18,3 +18,18 @@
 <!-- <p>{{ allowNewServer }}</p> -->
 
 <app-server *ngFor="let server of servers"></app-server>
+
+<hr />
+<!-- Exercise -->
+<button type="button" class="btn btn-primary" (click)="onClick()">
+  Display Details
+</button>
+<p *ngIf="displayParagraph">Secret password = tuna</p>
+
+<p
+  *ngFor="let logItem of log"
+  [ngStyle]="{ backgroundColor: logItem > 4 ? 'blue' : 'transparent' }"
+  [ngClass]="{ 'white-text': logItem >= 5 }"
+>
+  {{ logItem }}
+</p>
