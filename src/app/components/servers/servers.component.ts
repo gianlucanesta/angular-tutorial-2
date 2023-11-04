@@ -34,9 +34,9 @@ export class ServersComponent implements OnInit {
   }
 
   displayParagraph = false;
-  log: number[] = [];
+  log: Date[] = [];
   onClick() {
     this.displayParagraph = !this.displayParagraph;
-    this.log.push(this.log.length + 1);
+    this.log.push(new Date());
   }
 }
