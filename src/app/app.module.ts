@@ -12,7 +12,15 @@ import { CockpitComponent } from './components/cockpit/cockpit.component';
 import { ServerElementComponent } from './components/server-element/server-element.component';
 
 @NgModule({
-  declarations: [AppComponent, ServerComponent, ServersComponent, WarningalertComponent, SuccessalertComponent, CockpitComponent, ServerElementComponent],
+  declarations: [
+    AppComponent,
+    ServerComponent,
+    ServersComponent,
+    WarningalertComponent,
+    SuccessalertComponent,
+    CockpitComponent,
+    ServerElementComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
