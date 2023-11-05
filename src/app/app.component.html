@@ -1,12 +1,11 @@
 <div class="container">
+  <app-cockpit></app-cockpit>
   <div class="row">
     <div class="col-xs-12">
-      <h3>I'm the app component</h3>
       <hr />
-      <app-servers></app-servers>
-
-      <app-warningalert></app-warningalert>
-      <app-successalert></app-successalert>
+      <app-server-element
+        *ngFor="let serverElement of serverElements"
+      ></app-server-element>
     </div>
   </div>
 </div>
