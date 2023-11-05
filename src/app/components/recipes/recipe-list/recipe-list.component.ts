@@ -13,6 +13,16 @@ export class RecipeListComponent implements OnInit {
       'This is a simple description',
       'https://www.bibbyskitchenat36.com/wp-content/uploads/2021/01/DSC_9104-1.jpg'
     ),
+    new Recipe(
+      'A Test Recipe',
+      'This is a simple description',
+      'https://www.bibbyskitchenat36.com/wp-content/uploads/2021/01/DSC_9104-1.jpg'
+    ),
+    new Recipe(
+      'A Test Recipe',
+      'This is a simple description',
+      'https://www.bibbyskitchenat36.com/wp-content/uploads/2021/01/DSC_9104-1.jpg'
+    ),
   ];
 
   constructor() {}
