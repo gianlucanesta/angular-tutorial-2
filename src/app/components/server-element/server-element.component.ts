@@ -5,11 +5,13 @@ import {
   AfterViewInit,
   Component,
   DoCheck,
+  ElementRef,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
   SimpleChanges,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 
@@ -17,7 +19,7 @@ import {
   selector: 'app-server-element',
   templateUrl: './server-element.component.html',
   styleUrls: ['./server-element.component.css'],
-  encapsulation: ViewEncapsulation.Emulated,
+  encapsulation: ViewEncapsulation.Emulated, //None, Native
 })
 export class ServerElementComponent
   implements
@@ -38,12 +40,15 @@ export class ServerElementComponent
 
   @Input() name!: string;
 
+  @ViewChild('heading') header?: ElementRef;
+
   constructor() {
     console.log('constructor called!');
   }
 
   ngOnInit(): void {
     console.log('ngOnInit called!');
+    console.log('Text content ', this.header?.nativeElement.textContent);
   }
 
   ngDoCheck(): void {
@@ -57,6 +62,7 @@ export class ServerElementComponent
 
   ngAfterViewInit(): void {
     console.log('ngAfterViewInit called!');
+    console.log('Text content ', this.header?.nativeElement.textContent);
   }
 
   ngAfterViewChecked(): void {
