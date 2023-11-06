@@ -5,25 +5,9 @@
 </div>
 
 <div class="row mt-2 bg-light bg-gradient">
-  <div class="col-xs-12 list-group">
-    <a
-      href="#"
-      class="list-group-item list-group-item-action d-flex flex-row align-items-center justify-content-between"
-      *ngFor="let recipe of recipes"
-    >
-      <div class="">
-        <h4 class="list-group-item-heading">{{ recipe.name }}</h4>
-        <p class="list-group-item-text">{{ recipe.description }}</p>
-      </div>
-      <span class="">
-        <img
-          [src]="recipe.imagePath"
-          alt="{{ recipe.name }}"
-          class="img-responsiv"
-          style="max-height: 50px"
-        />
-      </span>
-    </a>
-  </div>
+  <div class="col-xs-12 list-group"></div>
 </div>
-<app-recipe-item></app-recipe-item>
+<app-recipe-item
+  *ngFor="let recipeEl of recipes"
+  [recipe]="recipeEl"
+></app-recipe-item>
