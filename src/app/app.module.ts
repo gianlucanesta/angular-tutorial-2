@@ -11,6 +11,7 @@ import { SuccessalertComponent } from './components/successalert/successalert.co
 import { CockpitComponent } from './components/cockpit/cockpit.component';
 import { ServerElementComponent } from './components/server-element/server-element.component';
 import { BasicHighlightDirective } from './basic-highlight/basic-hightlight-directive';
+import { BetterHighlightDirective } from './better-highlight/better-highlight.directive';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { BasicHighlightDirective } from './basic-highlight/basic-hightlight-dire
     CockpitComponent,
     ServerElementComponent,
     BasicHighlightDirective,
+    BetterHighlightDirective,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
