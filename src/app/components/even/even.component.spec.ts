@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ServerComponent } from './server.component';
+import { EvenComponent } from './even.component';
 
-describe('ServerComponent', () => {
-  let component: ServerComponent;
-  let fixture: ComponentFixture<ServerComponent>;
+describe('EvenComponent', () => {
+  let component: EvenComponent;
+  let fixture: ComponentFixture<EvenComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ServerComponent]
+      declarations: [EvenComponent]
     });
-    fixture = TestBed.createComponent(ServerComponent);
+    fixture = TestBed.createComponent(EvenComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
