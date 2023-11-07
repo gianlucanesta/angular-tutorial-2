@@ -12,6 +12,7 @@ import { CockpitComponent } from './components/cockpit/cockpit.component';
 import { ServerElementComponent } from './components/server-element/server-element.component';
 import { ActiveUsersComponent } from './components/active-users/active-users.component';
 import { InactiveUsersComponent } from './components/inactive-users/inactive-users.component';
+import { CounterService } from './services/counter/counter.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { InactiveUsersComponent } from './components/inactive-users/inactive-use
     InactiveUsersComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [],
+  providers: [CounterService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
