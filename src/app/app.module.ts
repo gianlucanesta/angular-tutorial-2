@@ -10,6 +10,8 @@ import { WarningalertComponent } from './components/warningalert/warningalert.co
 import { SuccessalertComponent } from './components/successalert/successalert.component';
 import { CockpitComponent } from './components/cockpit/cockpit.component';
 import { ServerElementComponent } from './components/server-element/server-element.component';
+import { ActiveUsersComponent } from './components/active-users/active-users.component';
+import { InactiveUsersComponent } from './components/inactive-users/inactive-users.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { ServerElementComponent } from './components/server-element/server-eleme
     SuccessalertComponent,
     CockpitComponent,
     ServerElementComponent,
+    ActiveUsersComponent,
+    InactiveUsersComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

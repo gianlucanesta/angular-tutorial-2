@@ -1,32 +1,19 @@
 <div class="container">
-  <app-cockpit
-    (serverCreated)="onServerAdded($event)"
-    (bpCreated)="onBlueprintAdded($event)"
-  >
-  </app-cockpit>
-  <hr />
   <div class="row">
-    <div class="col-xs-12">
-      <button class="btn btn-primary" (click)="onChangeFirst()">
-        Change first Element
-      </button>
-      <button class="btn btn-danger" (click)="onDestroyFirst()">
-        Destroy first Component
-      </button>
-      <app-server-element
-        *ngFor="let serverElement of serverElements"
-        [srvElement]="serverElement"
-        [name]="serverElement.name"
-      >
-        <p #contentParagraph>
-          <strong *ngIf="serverElement.type === 'server'" style="color: red">{{
-            serverElement.content
-          }}</strong>
-          <em *ngIf="serverElement.type === 'blueprint'"
-            >{{ serverElement.content }}
-          </em>
-        </p>
-      </app-server-element>
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <app-active-users
+        [users]="activeUsers"
+        (userSetToInactive)="onSetToInactive($event)"
+      ></app-active-users>
+      <app-inactive-users
+        [users]="inactiveUsers"
+        (userSetToActive)="onSetToActive($event)"
+      ></app-inactive-users>
     </div>
+    <!--
+      Optimize this app by adding a UsersService which manages the active and inactive users.
+
+      Also add a CounterService which counts the number of active->inactive and inactive->active actions.
+    -->
   </div>
 </div>
