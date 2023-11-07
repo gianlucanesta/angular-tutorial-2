@@ -12,6 +12,7 @@ import { WarningalertComponent } from './components/warningalert/warningalert.co
 import { ServerElementComponent } from './components/server-element/server-element.component';
 import { AccountComponent } from './components/account/account.component';
 import { NewAccountComponent } from './components/new-account/new-account.component';
+import { AccountsService } from './services/accounts.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { NewAccountComponent } from './components/new-account/new-account.compon
     NewAccountComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [],
+  providers: [AccountsService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
