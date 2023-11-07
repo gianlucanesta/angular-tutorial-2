@@ -4,43 +4,28 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  styles: [
-    `
-      h3 {
-        color: dodgerblue;
-      }
-    `,
-  ],
 })
 export class AppComponent {
-  serverElements = [
-    { type: 'server', name: 'Testserver', content: 'Just a test!' },
+  accounts = [
+    {
+      name: 'Master Account',
+      status: 'active',
+    },
+    {
+      name: 'Testaccount',
+      status: 'inactive',
+    },
+    {
+      name: 'Hidden Account',
+      status: 'unknown',
+    },
   ];
 
-  onServerAdded(serverData: { serverName: string; serverContent: string }) {
-    this.serverElements.push({
-      type: 'server',
-      name: serverData.serverName,
-      content: serverData.serverContent,
-    });
+  onAccountAdded(newAccount: { name: string; status: string }) {
+    this.accounts.push(newAccount);
   }
 
-  onBlueprintAdded(blueprintData: {
-    serverName: string;
-    serverContent: string;
-  }) {
-    this.serverElements.push({
-      type: 'blueprint',
-      name: blueprintData.serverName,
-      content: blueprintData.serverContent,
-    });
-  }
-
-  onChangeFirst() {
-    this.serverElements[0].name = 'Changed!';
-  }
-
-  onDestroyFirst() {
-    this.serverElements.splice(0, 1);
+  onStatusChanged(updateInfo: { id: number; newStatus: string }) {
+    this.accounts[updateInfo.id].status = updateInfo.newStatus;
   }
 }
