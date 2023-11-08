@@ -1,32 +1,32 @@
 <div class="container">
-  <app-cockpit
-    (serverCreated)="onServerAdded($event)"
-    (bpCreated)="onBlueprintAdded($event)"
-  >
-  </app-cockpit>
-  <hr />
   <div class="row">
-    <div class="col-xs-12">
-      <button class="btn btn-primary" (click)="onChangeFirst()">
-        Change first Element
-      </button>
-      <button class="btn btn-danger" (click)="onDestroyFirst()">
-        Destroy first Component
-      </button>
-      <app-server-element
-        *ngFor="let serverElement of serverElements"
-        [srvElement]="serverElement"
-        [name]="serverElement.name"
-      >
-        <p #contentParagraph>
-          <strong *ngIf="serverElement.type === 'server'" style="color: red">{{
-            serverElement.content
-          }}</strong>
-          <em *ngIf="serverElement.type === 'blueprint'"
-            >{{ serverElement.content }}
-          </em>
-        </p>
-      </app-server-element>
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <ul class="nav nav-tabs">
+        <li class="nav-item" role="presentation" class="active">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" href="#">Servers</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" href="#">Users</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <app-home></app-home>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <app-users></app-users>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <app-servers></app-servers>
     </div>
   </div>
 </div>
