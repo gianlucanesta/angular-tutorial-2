@@ -18,24 +18,4 @@ export class DropdownDirective {
       ? !this.isOpen
       : false;
   }
-
-  // constructor(private el: ElementRef, private renderer: Renderer2) {}
-
-  // @HostListener('click') onClick() {
-  //   const dropdown = this.el.nativeElement.nextElementSibling;
-
-  //   if (dropdown) {
-  //     this.renderer.addClass(dropdown, 'show');
-  //   }
-  // }
-
-  // @HostListener('document:click', ['$event.target']) onDocumentClick(
-  //   target: any
-  // ) {
-  //   const dropdown = this.el.nativeElement.nextElementSibling;
-
-  //   if (dropdown && !dropdown.contains(target)) {
-  //     this.renderer.removeClass(dropdown, 'show');
-  //   }
-  // }
 }
