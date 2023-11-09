@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./edit-server.component.css'],
 })
 export class EditServerComponent implements OnInit {
-  server?: { id: number; name: string; status: string };
+  server!: { id: number; name: string; status: string };
   serverName = '';
   serverStatus = '';
 
