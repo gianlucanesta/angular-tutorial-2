@@ -11,6 +11,7 @@ import { ServersComponent } from './components/servers/servers.component';
 import { UserComponent } from './components/users/user/user.component';
 import { UsersComponent } from './components/users/users.component';
 import { ServersService } from './components/servers/servers.service';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ServersService } from './components/servers/servers.service';
     UserComponent,
     EditServerComponent,
     ServerComponent,
+    PageNotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [ServersService],
