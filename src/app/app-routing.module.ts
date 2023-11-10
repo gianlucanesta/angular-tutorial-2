@@ -1,3 +1,4 @@
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { EditServerComponent } from './components/servers/edit-server/edit-server.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -31,9 +32,14 @@ const routes: Routes = [
       },
     ],
   },
+  // {
+  //   path: 'not-found',
+  //   component: PageNotFoundComponent,
+  // },
   {
     path: 'not-found',
-    component: PageNotFoundComponent,
+    component: ErrorPageComponent,
+    data: { message: 'Page not found!' },
   },
   {
     path: '**',
