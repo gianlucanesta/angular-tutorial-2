@@ -21,12 +21,15 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.authService.isAuthenticated().then((authenticated: boolean) => {
+    return (async () => {
+      const authenticated = await this.authService.isAuthenticated();
+
       if (authenticated) {
         return true;
       } else {
-        return this.router.navigate(['/']) as Promise<boolean | UrlTree>;
+        this.router.navigate(['/']);
+        return false;
       }
-    });
+    })();
   }
 }
