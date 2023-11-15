@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
   genders = ['male', 'female'];
 
   signupForm!: FormGroup;
+
   ngOnInit(): void {
     this.signupForm = new FormGroup({
       username: new FormControl(null),
