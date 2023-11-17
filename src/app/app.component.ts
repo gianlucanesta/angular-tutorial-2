@@ -35,6 +35,8 @@ export class AppComponent implements OnInit {
       },
       { asyncValidators: this.forbiddenEmails() }
     );
+    // this.signupForm.valueChanges.subscribe((value) => console.log(value));
+    this.signupForm.statusChanges.subscribe((status) => console.log(status));
   }
 
   get hobbiesControls(): AbstractControl[] {
