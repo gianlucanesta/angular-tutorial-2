@@ -5,7 +5,9 @@ import {
   FormGroup,
   Validators,
   AbstractControl,
+  AsyncValidatorFn,
 } from '@angular/forms';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -19,17 +21,20 @@ export class AppComponent implements OnInit {
   forbiddenUsernames = ['Chris', 'Anna'];
 
   ngOnInit(): void {
-    this.signupForm = new FormGroup({
-      userData: new FormGroup({
-        username: new FormControl(null, [
-          Validators.required,
-          this.forbiddenNames.bind(this),
-        ]),
-        email: new FormControl(null, [Validators.required, Validators.email]),
-      }),
-      gender: new FormControl('male'),
-      hobbies: new FormArray([]),
-    });
+    this.signupForm = new FormGroup(
+      {
+        userData: new FormGroup({
+          username: new FormControl(null, [
+            Validators.required,
+            this.forbiddenNames.bind(this),
+          ]),
+          email: new FormControl(null, [Validators.required, Validators.email]),
+        }),
+        gender: new FormControl('male'),
+        hobbies: new FormArray([]),
+      },
+      { asyncValidators: this.forbiddenEmails() }
+    );
   }
 
   get hobbiesControls(): AbstractControl[] {
@@ -48,6 +53,13 @@ export class AppComponent implements OnInit {
 
   onAddHobby() {
     const control = new FormControl(null, Validators.required);
+    this.forbiddenEmailsAsyncValidator()(control).subscribe((result) => {
+      if (result) {
+        control.setErrors({ emailIsForbidden: true });
+      } else {
+        control.setErrors(null);
+      }
+    });
     (this.signupForm.get('hobbies') as FormArray).push(control);
   }
 
@@ -56,5 +68,21 @@ export class AppComponent implements OnInit {
       return { nameIsForbidden: true };
     }
     return null;
+  }
+
+  forbiddenEmails(): AsyncValidatorFn {
+    return (
+      control: AbstractControl
+    ): Observable<{ [key: string]: any } | null> => {
+      return this.forbiddenEmailsAsyncValidator()(control as FormControl);
+    };
+  }
+
+  forbiddenEmailsAsyncValidator(): (control: FormControl) => Observable<any> {
+    return (control: FormControl): Observable<any> => {
+      return of(
+        control.value === 'test@test.com' ? { emailIsForbidden: true } : null
+      );
+    };
   }
 }
