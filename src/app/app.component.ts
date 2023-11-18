@@ -15,87 +15,89 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  genders = ['male', 'female'];
-  signupForm!: FormGroup;
+  ngOnInit(): void {}
 
-  forbiddenUsernames = ['Chris', 'Anna'];
+  // genders = ['male', 'female'];
+  // signupForm!: FormGroup;
 
-  ngOnInit(): void {
-    this.signupForm = new FormGroup(
-      {
-        userData: new FormGroup({
-          username: new FormControl(null, [
-            Validators.required,
-            this.forbiddenNames.bind(this),
-          ]),
-          email: new FormControl(null, [Validators.required, Validators.email]),
-        }),
-        gender: new FormControl('male'),
-        hobbies: new FormArray([]),
-      },
-      { asyncValidators: this.forbiddenEmails() }
-    );
-    // this.signupForm.valueChanges.subscribe((value) => console.log(value));
-    this.signupForm.statusChanges.subscribe((status) => console.log(status));
-    this.signupForm.setValue({
-      userData: { username: 'Max', email: 'max@test.com' },
-      gender: 'male',
-      hobbies: [],
-    });
-    this.signupForm.patchValue({
-      userData: {
-        username: 'Anna',
-      },
-    });
-  }
+  // forbiddenUsernames = ['Chris', 'Anna'];
 
-  get hobbiesControls(): AbstractControl[] {
-    return (this.signupForm.get('hobbies') as FormArray).controls;
-  }
+  // ngOnInit(): void {
+  //   this.signupForm = new FormGroup(
+  //     {
+  //       userData: new FormGroup({
+  //         username: new FormControl(null, [
+  //           Validators.required,
+  //           this.forbiddenNames.bind(this),
+  //         ]),
+  //         email: new FormControl(null, [Validators.required, Validators.email]),
+  //       }),
+  //       gender: new FormControl('male'),
+  //       hobbies: new FormArray([]),
+  //     },
+  //     { asyncValidators: this.forbiddenEmails() }
+  //   );
+  //   // this.signupForm.valueChanges.subscribe((value) => console.log(value));
+  //   this.signupForm.statusChanges.subscribe((status) => console.log(status));
+  //   this.signupForm.setValue({
+  //     userData: { username: 'Max', email: 'max@test.com' },
+  //     gender: 'male',
+  //     hobbies: [],
+  //   });
+  //   this.signupForm.patchValue({
+  //     userData: {
+  //       username: 'Anna',
+  //     },
+  //   });
+  // }
 
-  getHobbyFormControl(index: number): FormControl {
-    return (this.signupForm.get('hobbies') as FormArray).at(
-      index
-    ) as FormControl;
-  }
+  // get hobbiesControls(): AbstractControl[] {
+  //   return (this.signupForm.get('hobbies') as FormArray).controls;
+  // }
 
-  onSubmit() {
-    console.log(this.signupForm);
-    this.signupForm.reset();
-  }
+  // getHobbyFormControl(index: number): FormControl {
+  //   return (this.signupForm.get('hobbies') as FormArray).at(
+  //     index
+  //   ) as FormControl;
+  // }
 
-  onAddHobby() {
-    const control = new FormControl(null, Validators.required);
-    this.forbiddenEmailsAsyncValidator()(control).subscribe((result) => {
-      if (result) {
-        control.setErrors({ emailIsForbidden: true });
-      } else {
-        control.setErrors(null);
-      }
-    });
-    (this.signupForm.get('hobbies') as FormArray).push(control);
-  }
+  // onSubmit() {
+  //   console.log(this.signupForm);
+  //   this.signupForm.reset();
+  // }
 
-  forbiddenNames(control: FormControl): { [s: string]: boolean } | null {
-    if (this.forbiddenUsernames.indexOf(control.value) !== -1) {
-      return { nameIsForbidden: true };
-    }
-    return null;
-  }
+  // onAddHobby() {
+  //   const control = new FormControl(null, Validators.required);
+  //   this.forbiddenEmailsAsyncValidator()(control).subscribe((result) => {
+  //     if (result) {
+  //       control.setErrors({ emailIsForbidden: true });
+  //     } else {
+  //       control.setErrors(null);
+  //     }
+  //   });
+  //   (this.signupForm.get('hobbies') as FormArray).push(control);
+  // }
 
-  forbiddenEmails(): AsyncValidatorFn {
-    return (
-      control: AbstractControl
-    ): Observable<{ [key: string]: any } | null> => {
-      return this.forbiddenEmailsAsyncValidator()(control as FormControl);
-    };
-  }
+  // forbiddenNames(control: FormControl): { [s: string]: boolean } | null {
+  //   if (this.forbiddenUsernames.indexOf(control.value) !== -1) {
+  //     return { nameIsForbidden: true };
+  //   }
+  //   return null;
+  // }
 
-  forbiddenEmailsAsyncValidator(): (control: FormControl) => Observable<any> {
-    return (control: FormControl): Observable<any> => {
-      return of(
-        control.value === 'test@test.com' ? { emailIsForbidden: true } : null
-      );
-    };
-  }
+  // forbiddenEmails(): AsyncValidatorFn {
+  //   return (
+  //     control: AbstractControl
+  //   ): Observable<{ [key: string]: any } | null> => {
+  //     return this.forbiddenEmailsAsyncValidator()(control as FormControl);
+  //   };
+  // }
+
+  // forbiddenEmailsAsyncValidator(): (control: FormControl) => Observable<any> {
+  //   return (control: FormControl): Observable<any> => {
+  //     return of(
+  //       control.value === 'test@test.com' ? { emailIsForbidden: true } : null
+  //     );
+  //   };
+  // }
 }
