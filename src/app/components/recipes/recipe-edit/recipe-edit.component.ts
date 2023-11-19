@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, FormArray } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
+import { Ingredient } from '../../shared/ingredient.model';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -15,8 +16,17 @@ export class RecipeEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private recipeService: RecipeService
-  ) {}
+    private recipeService: RecipeService,
+    private formBuilder: FormBuilder
+  ) {
+    this.recipeForm = this.formBuilder.group({
+      ingredients: this.formBuilder.array([]),
+    });
+  }
+
+  get ingredientsFormArray(): FormArray | null {
+    return this.recipeForm.get('ingredients') as FormArray;
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -31,20 +41,24 @@ export class RecipeEditComponent implements OnInit {
   }
 
   private initForm() {
-    let recipeName = '';
-    let recipeImagePath = '';
-    let recipeDescription = '';
-    if (this.editMode) {
-      const recipe = this.recipeService.getRecipe(this.id);
+    const recipe = this.editMode ? this.recipeService.getRecipe(this.id) : null;
 
-      recipeName = recipe.name;
-      recipeImagePath = recipe.imagePath;
-      recipeDescription = recipe.description;
-    }
-    this.recipeForm = new FormGroup({
-      name: new FormControl(recipeName),
-      imagePath: new FormControl(recipeImagePath),
-      description: new FormControl(recipeDescription),
+    this.recipeForm = this.formBuilder.group({
+      name: [recipe?.name || ''],
+      imagePath: [recipe?.imagePath || ''],
+      description: [recipe?.description || ''],
+      ingredients: this.buildIngredientsFormArray(recipe?.ingredients || []),
     });
+  }
+
+  private buildIngredientsFormArray(ingredients: Ingredient[]): FormArray {
+    return this.formBuilder.array(
+      ingredients.map((ingredient) =>
+        this.formBuilder.group({
+          name: ingredient.name || '',
+          amount: ingredient.amount || '',
+        })
+      )
+    );
   }
 }
