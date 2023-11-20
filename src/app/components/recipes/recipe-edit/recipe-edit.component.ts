@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, FormArray } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormArray,
+  Validators,
+} from '@angular/forms';
 import { RecipeService } from '../recipe.service';
 import { Ingredient } from '../../shared/ingredient.model';
 
@@ -43,8 +49,11 @@ export class RecipeEditComponent implements OnInit {
   onAddIngredient() {
     (<FormArray>this.recipeForm.get('ingredients')).push(
       new FormGroup({
-        name: new FormControl(),
-        amount: new FormControl(),
+        name: new FormControl(null, Validators.required),
+        amount: new FormControl(null, [
+          Validators.required,
+          Validators.pattern(/^[1-9]+[0-9]*$/),
+        ]),
       })
     );
   }
@@ -53,9 +62,9 @@ export class RecipeEditComponent implements OnInit {
     const recipe = this.editMode ? this.recipeService.getRecipe(this.id) : null;
 
     this.recipeForm = this.formBuilder.group({
-      name: [recipe?.name || ''],
-      imagePath: [recipe?.imagePath || ''],
-      description: [recipe?.description || ''],
+      name: [recipe?.name || '', Validators.required],
+      imagePath: [recipe?.imagePath || '', Validators.required],
+      description: [recipe?.description || '', Validators.required],
       ingredients: this.buildIngredientsFormArray(recipe?.ingredients || []),
     });
   }
