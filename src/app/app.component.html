@@ -12,14 +12,18 @@
       <ul class="list-group">
         <li
           class="list-group-item"
-          *ngFor="let server of servers | filter : filteredStatus : 'status'"
+          *ngFor="
+            let server of servers
+              | filter : filteredStatus : 'status'
+              | sort : 'name'
+          "
           [ngClass]="getStatusClasses(server)"
         >
           <span class="badge bg-secondary me-1">
             {{ server.status }}
           </span>
           <strong>{{ server.name | shorten : 10 }}</strong> |
-          {{ server.instanceType | uppercase }} |
+          {{ server.instanceType | uppercase | reverse }} |
           {{ server.started | date : "fullDate" | uppercase }}
         </li>
       </ul>
