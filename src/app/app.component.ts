@@ -11,17 +11,21 @@ export class AppComponent implements OnInit {
   dbLink: string =
     'https://ng-complete-guide-111f9-default-rtdb.europe-west1.firebasedatabase.app/';
 
+  postMethod: string = 'posts.json';
+
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchPosts();
+  }
 
   onCreatePost(postData: { title: string; content: string }) {
     // Send Http request
     console.log(postData);
     this.http
-      .post(this.dbLink + 'posts.json', postData)
+      .post(this.dbLink + this.postMethod, postData)
       .subscribe((responseData) => {
-        console.log(responseData);
+        // console.log(responseData);
       });
   }
 
@@ -31,5 +35,11 @@ export class AppComponent implements OnInit {
 
   onClearPosts() {
     // Send Http request
+  }
+
+  private fetchPosts() {
+    this.http.get(this.dbLink + this.postMethod).subscribe((posts) => {
+      console.log(posts);
+    });
   }
 }
