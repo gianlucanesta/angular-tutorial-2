@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent implements OnInit {
   loadedPosts = [];
+  dbLink: string =
+    'https://ng-complete-guide-111f9-default-rtdb.europe-west1.firebasedatabase.app/';
 
   constructor(private http: HttpClient) {}
 
@@ -16,6 +18,11 @@ export class AppComponent implements OnInit {
   onCreatePost(postData: { title: string; content: string }) {
     // Send Http request
     console.log(postData);
+    this.http
+      .post(this.dbLink + 'posts.json', postData)
+      .subscribe((responseData) => {
+        console.log(responseData);
+      });
   }
 
   onFetchPosts() {
