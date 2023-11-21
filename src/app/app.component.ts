@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs';
+import { PostModel } from './model/post/post.model';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +23,7 @@ export class AppComponent implements OnInit {
 
   onCreatePost(postData: { title: string; content: string }) {
     // Send Http request
-    console.log(postData);
+    // console.log(postData);
     this.http
       .post(this.dbLink + this.postMethod, postData)
       .subscribe((responseData) => {
@@ -38,8 +40,28 @@ export class AppComponent implements OnInit {
   }
 
   private fetchPosts() {
-    this.http.get(this.dbLink + this.postMethod).subscribe((posts) => {
-      console.log(posts);
-    });
+    this.http
+      .get<{ [key: string]: PostModel }>(this.dbLink + this.postMethod)
+      .pipe(
+        map((responseData) => {
+          const postArray: PostModel[] = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              postArray.push({ ...responseData[key], id: key });
+              // postArray.push(
+              //   new PostModel(
+              //     responseData[key].title,
+              //     responseData[key].content,
+              //     key
+              //   )
+              // );
+            }
+          }
+          return postArray;
+        })
+      )
+      .subscribe((posts) => {
+        console.log(posts);
+      });
   }
 }
