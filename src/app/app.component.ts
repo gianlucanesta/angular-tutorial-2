@@ -10,6 +10,7 @@ import { PostModel } from './model/post/post.model';
 })
 export class AppComponent implements OnInit {
   loadedPosts: PostModel[] = [];
+  isFetching = false;
   dbLink: string =
     'https://ng-complete-guide-111f9-default-rtdb.europe-west1.firebasedatabase.app/';
 
@@ -40,6 +41,7 @@ export class AppComponent implements OnInit {
   }
 
   private fetchPosts() {
+    this.isFetching = true;
     this.http
       .get<{ [key: string]: PostModel }>(this.dbLink + this.postMethod)
       .pipe(
@@ -55,6 +57,7 @@ export class AppComponent implements OnInit {
       )
       .subscribe((posts) => {
         console.log(posts);
+        this.isFetching = false;
         this.loadedPosts = posts;
       });
   }
