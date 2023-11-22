@@ -9,7 +9,7 @@ import { PostModel } from './model/post/post.model';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  loadedPosts = [];
+  loadedPosts: PostModel[] = [];
   dbLink: string =
     'https://ng-complete-guide-111f9-default-rtdb.europe-west1.firebasedatabase.app/';
 
@@ -48,13 +48,6 @@ export class AppComponent implements OnInit {
           for (const key in responseData) {
             if (responseData.hasOwnProperty(key)) {
               postArray.push({ ...responseData[key], id: key });
-              // postArray.push(
-              //   new PostModel(
-              //     responseData[key].title,
-              //     responseData[key].content,
-              //     key
-              //   )
-              // );
             }
           }
           return postArray;
@@ -62,6 +55,7 @@ export class AppComponent implements OnInit {
       )
       .subscribe((posts) => {
         console.log(posts);
+        this.loadedPosts = posts;
       });
   }
 }
