@@ -28,7 +28,7 @@ export class PostService {
   }
 
   fetchPosts() {
-    this.http
+    return this.http
       .get<{ [key: string]: PostModel }>(this.dbLink + this.postMethod)
       .pipe(
         map((responseData) => {
@@ -40,11 +40,6 @@ export class PostService {
           }
           return postArray;
         })
-      )
-      .subscribe((posts) => {
-        console.log(posts);
-        this.isFetching = false;
-        this.loadedPosts = posts;
-      });
+      );
   }
 }
