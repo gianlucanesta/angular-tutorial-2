@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     // Send Http request
     // console.log(postData);
     this.http
-      .post(this.dbLink + this.postMethod, postData)
+      .post<{ name: string }>(this.dbLink + this.postMethod, postData)
       .subscribe((responseData) => {
         // console.log(responseData);
       });
