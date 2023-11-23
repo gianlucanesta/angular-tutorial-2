@@ -23,4 +23,13 @@ export class DataStorageService {
       .put(this.baseUrl + this.recipesRoute + this.extJson, recipes)
       .subscribe((response) => console.log(response));
   }
+
+  fetchRecipes() {
+    this.http
+      .get<Recipe[]>(this.baseUrl + this.recipesRoute + this.extJson)
+      .subscribe((recipes) => {
+        // console.log(recipes);
+        this.recipesService.setRecipes(recipes);
+      });
+  }
 }
