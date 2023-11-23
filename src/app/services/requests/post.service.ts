@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PostModel } from 'src/app/model/post/post.model';
 
@@ -8,6 +9,7 @@ import { PostModel } from 'src/app/model/post/post.model';
 })
 export class PostService {
   loadedPosts: PostModel[] = [];
+  error = new Subject<string>();
   isFetching = false;
   dbLink: string =
     'https://ng-complete-guide-111f9-default-rtdb.europe-west1.firebasedatabase.app/';
@@ -22,9 +24,14 @@ export class PostService {
     };
     this.http
       .post<{ name: string }>(this.dbLink + this.postMethod, postData)
-      .subscribe((responseData) => {
-        // console.log(responseData);
-      });
+      .subscribe(
+        (responseData) => {
+          // console.log(responseData);
+        },
+        (error) => {
+          this.error.next(error.message);
+        }
+      );
   }
 
   fetchPosts() {
