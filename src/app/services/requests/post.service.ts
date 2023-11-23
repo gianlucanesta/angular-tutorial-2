@@ -52,6 +52,7 @@ export class PostService {
         }),
         // params: new HttpParams().set('print', 'pretty'),
         params: searchParams,
+        responseType: 'json',
       })
       .pipe(
         map((responseData) => {
@@ -74,6 +75,7 @@ export class PostService {
     return this.http
       .delete(this.dbLink + '.json', {
         observe: 'events',
+        responseType: 'text',
       })
       .pipe(
         tap((event) => {
