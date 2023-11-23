@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subject, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { PostModel } from 'src/app/model/post/post.model';
 
 @Injectable({
@@ -34,7 +34,7 @@ export class PostService {
       );
   }
 
-  fetchPosts() {
+  fetchPosts(): Observable<PostModel[]> {
     return this.http
       .get<{ [key: string]: PostModel }>(this.dbLink + this.postMethod)
       .pipe(
@@ -46,6 +46,10 @@ export class PostService {
             }
           }
           return postArray;
+        }),
+        catchError((errorRes) => {
+          //Send to analytics server
+          return throwError(errorRes);
         })
       );
   }
