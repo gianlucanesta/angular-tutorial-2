@@ -44,6 +44,6 @@ export class PostService {
   }
 
   deletePosts() {
-    return this.http.delete(this.dbLink);
+    return this.http.delete(this.dbLink + '.json');
   }
 }
