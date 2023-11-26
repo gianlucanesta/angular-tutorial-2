@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, tap } from 'rxjs/operators';
 import { BehaviorSubject, Subject, throwError } from 'rxjs';
 import { User } from './user/user.model';
+import { Router } from '@angular/router';
 
 export interface AuthResponseData {
   idToken: string;
@@ -17,13 +18,13 @@ export interface AuthResponseData {
   providedIn: 'root',
 })
 export class AuthService {
-  user = new BehaviorSubject<User>(new User('', '', '', new Date()));
+  user = new BehaviorSubject<User | null>(null);
 
   token: string | null = null;
 
   API_KEY: string = 'AIzaSyDwfiOSXlrP__97Vqt-2F8gMsVuK8HPyJc';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   signup(email: string, password: string) {
     return this.http
@@ -71,6 +72,11 @@ export class AuthService {
           );
         })
       );
+  }
+
+  logout() {
+    this.user.next(null);
+    this.router.navigate(['/auth']);
   }
 
   private handleAuthentication(
