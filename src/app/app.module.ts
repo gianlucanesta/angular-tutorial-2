@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -6,13 +6,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { ShoppingListService } from './components/shopping-list/shopping-list.service';
-import { RecipeService } from './components/recipes/recipe.service';
 import { AuthComponent } from './authentication/auth/auth.component';
-import { AuthInterceptorService } from './authentication/interceptor/auth-interceptor.service';
 import { RecipesModule } from './components/recipes/recipes.module';
 import { ShoppingListModule } from './components/shopping-list/shopping-list.module';
 import { SharedModule } from './components/shared/shared.module';
+import { CoreModule } from './core.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, AuthComponent],
@@ -25,15 +23,7 @@ import { SharedModule } from './components/shared/shared.module';
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
-  ],
-  providers: [
-    ShoppingListService,
-    RecipeService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
-      multi: true,
-    },
+    CoreModule,
   ],
   bootstrap: [AppComponent],
 })
