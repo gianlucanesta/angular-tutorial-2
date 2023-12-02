@@ -5,6 +5,6 @@ import { Directive, ViewContainerRef } from '@angular/core';
 })
 export class PlaceholderDirective {
   constructor(public viewContainerRef: ViewContainerRef) {
-    console.log('questa è la direttiva placeholder');
+    // console.log('questa è la direttiva placeholder');
   }
 }
