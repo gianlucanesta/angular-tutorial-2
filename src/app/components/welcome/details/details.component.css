@@ -1,9 +1,9 @@
 section {
   background-color: #212020;
-  padding: 0.5rem;
-  border-radius: 4px;
+  padding: 0.5rem !important;
+  border-radius: 4px !important;
 }
 
 section h2 {
-  font-size: 1.25rem;
+  font-size: 1.25rem !important;
 }
