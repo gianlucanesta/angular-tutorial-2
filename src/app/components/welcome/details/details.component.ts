@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { AnalyticsService } from 'src/app/components/shared/analytics.service';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
+  standalone: true,
+  imports: [SharedModule],
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css'],
