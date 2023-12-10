@@ -1,3 +1,4 @@
+import { counterReducer } from './store/counter.reducer';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +15,12 @@ import { StoreModule } from '@ngrx/store';
     CounterOutputComponent,
     CounterControlsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, StoreModule.forRoot({}, {})],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    StoreModule.forRoot({ counter: counterReducer }, {}),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
