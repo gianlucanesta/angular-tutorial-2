@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CounterControlsComponent } from './components/counter-controls/counter-controls.component';
 import { CounterOutputComponent } from './components/counter-output/counter-output.component';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,7 @@ import { CounterOutputComponent } from './components/counter-output/counter-outp
     CounterOutputComponent,
     CounterControlsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, StoreModule.forRoot({}, {})],
   providers: [],
   bootstrap: [AppComponent],
 })
