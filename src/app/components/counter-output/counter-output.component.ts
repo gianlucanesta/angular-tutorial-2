@@ -6,6 +6,7 @@ import { CounterService } from 'src/app/services/counter.service';
   selector: 'app-counter-output',
   templateUrl: './counter-output.component.html',
   styleUrls: ['./counter-output.component.css'],
+  standalone: true,
 })
 export class CounterOutputComponent implements OnInit, OnDestroy {
   counter = 0;
