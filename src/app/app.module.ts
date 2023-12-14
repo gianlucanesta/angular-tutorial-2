@@ -11,6 +11,7 @@ import { SharedModule } from './components/shared/shared.module';
 import { CoreModule } from './core.module';
 import { AuthModule } from './authentication/auth.module';
 import { LoggingService } from './logging.service';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -23,6 +24,7 @@ import { LoggingService } from './logging.service';
     SharedModule,
     CoreModule,
     AuthModule,
+    StoreModule.forRoot({}, {}),
   ],
   bootstrap: [AppComponent],
   providers: [LoggingService],
