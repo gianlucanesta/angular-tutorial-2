@@ -11,7 +11,12 @@ import { SharedModule } from './components/shared/shared.module';
 import { CoreModule } from './core.module';
 import { AuthModule } from './authentication/auth.module';
 import { LoggingService } from './logging.service';
-import { StoreModule } from '@ngrx/store';
+import { ActionReducerMap, StoreModule } from '@ngrx/store';
+import { shoppingListReducer } from './components/shopping-list/store/shopping-list.reducer';
+
+const reducers: ActionReducerMap<any, any> = {
+  shoppingList: shoppingListReducer,
+};
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -24,7 +29,7 @@ import { StoreModule } from '@ngrx/store';
     SharedModule,
     CoreModule,
     AuthModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(reducers),
   ],
   bootstrap: [AppComponent],
   providers: [LoggingService],
