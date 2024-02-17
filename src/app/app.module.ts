@@ -11,13 +11,8 @@ import { SharedModule } from './components/shared/shared.module';
 import { CoreModule } from './core.module';
 import { AuthModule } from './authentication/auth.module';
 import { LoggingService } from './logging.service';
-import { ActionReducerMap, StoreModule } from '@ngrx/store';
-import { shoppingListReducer } from './components/shopping-list/store/shopping-list.reducer';
-
-const reducers: ActionReducerMap<any, any> = {
-  shoppingList: shoppingListReducer,
-};
-
+import { StoreModule } from '@ngrx/store';
+import * as fromApp from './components/store/app.reducer';
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
   imports: [
@@ -29,7 +24,7 @@ const reducers: ActionReducerMap<any, any> = {
     SharedModule,
     CoreModule,
     AuthModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot(fromApp.appReducer),
   ],
   bootstrap: [AppComponent],
   providers: [LoggingService],
