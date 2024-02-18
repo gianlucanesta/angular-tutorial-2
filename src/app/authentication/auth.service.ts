@@ -164,7 +164,6 @@ export class AuthService {
     );
 
     this.autoLogout(expiresIn * 1000);
-
     localStorage.setItem('userData', JSON.stringify(user));
   }
 

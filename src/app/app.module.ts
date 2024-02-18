@@ -13,6 +13,7 @@ import { AuthModule } from './authentication/auth.module';
 import { LoggingService } from './logging.service';
 import { StoreModule } from '@ngrx/store';
 import * as fromApp from './components/store/app.reducer';
+import { EffectsModule } from '@ngrx/effects';
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
   imports: [
@@ -25,6 +26,7 @@ import * as fromApp from './components/store/app.reducer';
     CoreModule,
     AuthModule,
     StoreModule.forRoot(fromApp.appReducer),
+    EffectsModule.forRoot([]),
   ],
   bootstrap: [AppComponent],
   providers: [LoggingService],
