@@ -23,7 +23,7 @@ export interface AuthResponseData {
   providedIn: 'root',
 })
 export class AuthService {
-  user = new BehaviorSubject<User | null>(null);
+  // user = new BehaviorSubject<User | null>(null);
 
   token: string | null = null;
 
