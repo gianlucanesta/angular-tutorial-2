@@ -3,10 +3,14 @@ import * as AuthActions from './auth.actions';
 
 export interface State {
   user: User | null;
+  authError: string | null;
+  loading: boolean;
 }
 
 const initialState = {
   user: null,
+  authError: null,
+  loading: false,
 };
 
 export const authReducer = (
@@ -24,7 +28,9 @@ export const authReducer = (
       );
       return {
         ...state,
+        authError: null,
         user: user,
+        loading: false,
       };
 
     case AuthActions.LOGOUT:
@@ -32,7 +38,18 @@ export const authReducer = (
         ...state,
         user: null,
       };
-
+    case AuthActions.LOGIN_START:
+      return {
+        ...state,
+        authError: null,
+        loading: true,
+      };
+    case AuthActions.LOGIN_FAIL:
+      return {
+        ...state,
+        authError: action.payload,
+        loading: false,
+      };
     default:
       return state;
   }
