@@ -1,8 +1,8 @@
 import { Actions, ofType } from '@ngrx/effects';
 import * as AuthActions from './auth.actions';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { AuthResponseData } from '../auth.service';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 export interface AuthResponseData {
   idToken: string;
@@ -12,7 +12,7 @@ export interface AuthResponseData {
   localId: string;
   registered?: string;
 }
-
+@Injectable()
 export class AuthEffects {
   API_KEY: string = 'AIzaSyDwfiOSXlrP__97Vqt-2F8gMsVuK8HPyJc';
 
@@ -31,10 +31,20 @@ export class AuthEffects {
           }
         )
         .pipe(
-          catchError((error) => {
-            of();
+          map((resData: any) => {
+            const expirationDate = new Date(
+              new Date().getTime() + resData.expiresIn * 1000
+            );
+            new AuthActions.Login({
+              email: resData.email,
+              userId: resData.userId,
+              token: resData.token,
+              expirationDate: resData.expirationDate,
+            });
           }),
-          map((resData: any) => {})
+          catchError((error) => {
+            return of();
+          })
         );
     })
   );
