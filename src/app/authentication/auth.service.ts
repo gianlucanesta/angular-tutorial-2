@@ -1,8 +1,6 @@
-import { environment } from './../../environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, tap } from 'rxjs/operators';
-import { BehaviorSubject, Subject, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from './user/user.model';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
@@ -140,6 +138,6 @@ export class AuthService {
           errorMessage = 'An unexpected error occurred';
       }
     }
-    return throwError(errorMessage);
+    return new Observable((observer) => observer.error(errorMessage));
   }
 }

@@ -44,6 +44,10 @@ export class SignupStart implements Action {
   constructor(public payload: { email: string; password: string }) {}
 }
 
+export class AutoLogin implements Action {
+  readonly type = AUTO_LOGIN;
+}
+
 export class ClearError implements Action {
   readonly type = CLEAR_ERROR;
 }
@@ -54,4 +58,5 @@ export type AuthActions =
   | LoginStart
   | AuthenticateFail
   | SignupStart
-  | ClearError;
+  | ClearError
+  | AutoLogin;
