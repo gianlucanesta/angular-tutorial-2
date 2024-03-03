@@ -17,6 +17,7 @@ import * as fromApp from './components/store/app.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './authentication/store/auth.effect';
 import { environment } from 'src/environments/environment.development';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
   imports: [
@@ -34,6 +35,7 @@ import { environment } from 'src/environments/environment.development';
       maxAge: 25,
       logOnly: environment.production,
     }),
+    StoreRouterConnectingModule.forRoot(),
   ],
   bootstrap: [AppComponent],
   providers: [LoggingService],
