@@ -1,4 +1,4 @@
-import { AuthResponseData, AuthService } from './../auth.service';
+import { AuthService } from './../auth.service';
 import {
   Component,
   ComponentFactoryResolver,
@@ -7,9 +7,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { AlertComponent } from 'src/app/components/shared/alert/alert/alert.component';
 import { PlaceholderDirective } from 'src/app/components/shared/placeholder/placeholder.directive';
@@ -31,8 +30,6 @@ export class AuthComponent implements OnInit, OnDestroy {
   private storeSub!: Subscription;
 
   constructor(
-    private authService: AuthService,
-    private router: Router,
     private componentFactoryResolver: ComponentFactoryResolver,
     private store: Store<fromApp.AppState>
   ) {}
@@ -41,6 +38,9 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.storeSub = this.store.select('auth').subscribe((authState) => {
       this.isLoading = authState.loading;
       this.error = authState.authError;
+      if (this.error) {
+        this.showErrorAlert(this.error);
+      }
     });
   }
 

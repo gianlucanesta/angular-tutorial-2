@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable, map, take, tap } from 'rxjs';
+import { Observable, map, take } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../components/store/app.reducer';
 
@@ -33,9 +33,6 @@ export class AuthGuard implements CanActivate {
         }
         return this.router.createUrlTree(['/auth']);
       })
-      // tap((isAuth) => {
-      //   this.router.navigate(['/auth']);
-      // })
     );
   }
 }
