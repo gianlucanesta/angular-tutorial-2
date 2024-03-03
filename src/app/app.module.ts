@@ -1,3 +1,4 @@
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,6 +16,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromApp from './components/store/app.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './authentication/store/auth.effect';
+import { environment } from 'src/environments/environment.development';
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
   imports: [
@@ -28,6 +30,10 @@ import { AuthEffects } from './authentication/store/auth.effect';
     AuthModule,
     StoreModule.forRoot(fromApp.appReducer),
     EffectsModule.forRoot([AuthEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
   bootstrap: [AppComponent],
   providers: [LoggingService],
