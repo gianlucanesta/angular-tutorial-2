@@ -9,7 +9,10 @@ import {
 } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
 import { Ingredient } from '../../shared/ingredient.model';
-import { Recipe } from '../recipe.model';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../store/app.reducer';
+import * as RecipesActions from '../store/recipe.actions';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -25,7 +28,8 @@ export class RecipeEditComponent implements OnInit {
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private store: Store<fromApp.AppState>
   ) {
     this.recipeForm = this.formBuilder.group({
       ingredients: this.formBuilder.array([]),
@@ -71,18 +75,33 @@ export class RecipeEditComponent implements OnInit {
 
   onDeleteIngredient(index: number) {
     (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
-    // (<FormArray>this.recipeForm.get('ingredients')).clear();
   }
 
   private initForm() {
-    const recipe = this.editMode ? this.recipeService.getRecipe(this.id) : null;
+    let recipeName = '';
+    let recipeImagePath = '';
+    let recipeDescription = '';
+    let recipeIngredients = new FormArray([]);
 
-    this.recipeForm = this.formBuilder.group({
-      name: [recipe?.name || '', Validators.required],
-      imagePath: [recipe?.imagePath || '', Validators.required],
-      description: [recipe?.description || '', Validators.required],
-      ingredients: this.buildIngredientsFormArray(recipe?.ingredients || []),
-    });
+    this.store
+      .select('recipes')
+      .pipe(
+        map((recipesState) => {
+          return recipesState.recipes.find((recipe, index) => {
+            return index === this.id;
+          });
+        })
+      )
+      .subscribe((recipe) => {
+        this.recipeForm = this.formBuilder.group({
+          name: [recipe?.name || '', Validators.required],
+          imagePath: [recipe?.imagePath || '', Validators.required],
+          description: [recipe?.description || '', Validators.required],
+          ingredients: this.buildIngredientsFormArray(
+            recipe?.ingredients || []
+          ),
+        });
+      });
   }
 
   private buildIngredientsFormArray(ingredients: Ingredient[]): FormArray {
