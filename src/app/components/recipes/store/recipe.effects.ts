@@ -2,8 +2,10 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as RecipeActions from './recipe.actions';
 import { HttpClient } from '@angular/common/http';
 import { Recipe } from '../recipe.model';
-import { map, switchMap } from 'rxjs/operators';
+import { catchError, switchMap, map, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
+
 @Injectable()
 export class RecipeEffects {
   baseUrl =
@@ -14,18 +16,27 @@ export class RecipeEffects {
   fetchRecipes = createEffect(() =>
     this.actions$.pipe(
       ofType(RecipeActions.FETCH_RECIPES),
-      switchMap(() => {
-        return this.http.get<Recipe[]>(
-          this.baseUrl + this.recipesRoute + this.extJson
-        );
-      }),
-      map((recipes) => {
-        return recipes.map((recipe) => {
-          return {
-            ...recipe,
-            ingredients: recipe.ingredients ? recipe.ingredients : [],
-          };
-        });
+      tap(() => console.log('Before HTTP Request')),
+      switchMap(() =>
+        this.http
+          .get<Recipe[]>(this.baseUrl + this.recipesRoute + this.extJson)
+          .pipe(
+            catchError((error) => {
+              return of([]);
+            })
+          )
+      ),
+      switchMap((recipes) => {
+        if (recipes == null) {
+          return of([]);
+        } else {
+          return of(
+            recipes.map((recipe) => ({
+              ...recipe,
+              ingredients: recipe.ingredients ? recipe.ingredients : [],
+            }))
+          );
+        }
       }),
       map((recipes) => new RecipeActions.SetRecipes(recipes))
     )
