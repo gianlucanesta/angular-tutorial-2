@@ -5,9 +5,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Recipe } from './recipe.model';
-import { Observable, of } from 'rxjs';
-import { DataStorageService } from '../shared/data-storage.service';
-import { RecipeService } from './recipe.service';
+import { of } from 'rxjs';
 import * as fromApp from '../store/app.reducer';
 import { Store } from '@ngrx/store';
 import { take, map, switchMap } from 'rxjs/operators';
@@ -19,8 +17,6 @@ import * as RecipesActions from './store/recipe.actions';
 })
 export class RecipesResolverService implements Resolve<Recipe[]> {
   constructor(
-    private dataStorageService: DataStorageService,
-    private recipeService: RecipeService,
     private store: Store<fromApp.AppState>,
     private actions$: Actions
   ) {}
