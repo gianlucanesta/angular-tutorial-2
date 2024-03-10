@@ -17,62 +17,88 @@
 
 <div class="row">
   <div class="col-xs-12">
-    <div
-      class="btn-group-vertical"
-      role="group"
-      aria-label="Vertical button group"
-    >
-      <div class="btn-group" role="group" appDropdown>
-        <button
-          type="button"
-          class="btn btn-primary dropdown-toggle"
-          data-bs-toggle="dropdown"
-          aria-expanded="true"
-        >
-          Manage Recipe
-        </button>
-        <ul class="dropdown-menu">
-          <li>
-            <a
-              class="dropdown-item"
-              (click)="onAddToShoppingList()"
-              style="cursor: pointer"
-              >Add to Shopping List</a
-            >
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              style="cursor: pointer"
-              (click)="onEditRecipe()"
-              >Edit Recipe</a
-            >
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              style="cursor: pointer"
-              (click)="onDeleteRecipe()"
-              >Delete Recipe</a
-            >
-          </li>
-        </ul>
+    <div class="row">
+      <div class="col">
+        <div ngbDropdown class="d-inline-block">
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          >
+            Manage Recipe
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem (click)="onAddToShoppingList()">
+              Add to Shopping List
+            </button>
+            <button ngbDropdownItem (click)="onEditRecipe()">
+              Edit Recipe
+            </button>
+            <button ngbDropdownItem (click)="onDeleteRecipe()">
+              Delete Recipe
+            </button>
+          </div>
+        </div>
       </div>
+
+      <!-- <div
+        class="btn-group-vertical"
+        role="group"
+        aria-label="Vertical button group"
+      >
+        <div class="btn-group" role="group" appDropdown>
+          <button
+            type="button"
+            class="btn btn-primary dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="true"
+          >
+            Manage Recipe
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a
+                class="dropdown-item"
+                (click)="onAddToShoppingList()"
+                style="cursor: pointer"
+                >Add to Shopping List</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                style="cursor: pointer"
+                (click)="onEditRecipe()"
+                >Edit Recipe</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                style="cursor: pointer"
+                (click)="onDeleteRecipe()"
+                >Delete Recipe</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div> -->
     </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-xs-12">{{ recipe.description }}</div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <div class="list-group">
-      <div
-        class="list-group-item"
-        *ngFor="let ingredient of recipe.ingredients"
-      >
-        {{ ingredient.name }} - {{ ingredient.amount }}
+  <div class="row">
+    <div class="col-xs-12">{{ recipe.description }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="list-group">
+        <div
+          class="list-group-item"
+          *ngFor="let ingredient of recipe.ingredients"
+        >
+          {{ ingredient.name }} - {{ ingredient.amount }}
+        </div>
       </div>
     </div>
   </div>

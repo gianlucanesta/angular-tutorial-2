@@ -19,9 +19,11 @@ import { AuthEffects } from './authentication/store/auth.effect';
 import { environment } from 'src/environments/environment.development';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { RecipeEffects } from './components/recipes/store/recipe.effects';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent],
   imports: [
+    HeaderComponent,
     BrowserModule,
     HttpClientModule,
     RecipesModule,
@@ -37,6 +39,7 @@ import { RecipeEffects } from './components/recipes/store/recipe.effects';
       logOnly: environment.production,
     }),
     StoreRouterConnectingModule.forRoot(),
+    NgbModule,
   ],
   bootstrap: [AppComponent],
   providers: [LoggingService],

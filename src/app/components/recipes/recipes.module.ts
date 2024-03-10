@@ -14,7 +14,6 @@ import { SharedModule } from '../shared/shared.module';
   declarations: [
     RecipesComponent,
     RecipeListComponent,
-    RecipeDetailComponent,
     RecipeItemComponent,
     RecipeStartComponent,
     RecipeEditComponent,
@@ -24,6 +23,7 @@ import { SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     RecipesRoutingModule,
     SharedModule,
+    RecipeDetailComponent,
   ],
 })
 export class RecipesModule {}

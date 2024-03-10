@@ -1,16 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
-import 'bootstrap';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
 import { map, switchMap } from 'rxjs/operators';
 import * as RecipesActions from '../store/recipe.actions';
 import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-recipe-detail',
+  standalone: true,
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.css'],
+  imports: [NgbDropdownModule, CommonModule],
 })
 export class RecipeDetailComponent implements OnInit {
   @Input() recipe!: Recipe;

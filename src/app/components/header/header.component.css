@@ -1,0 +1,18 @@
+.nav-link.active {
+  background-color: transparent;
+  border-color: transparent;
+  border-bottom: 0px;
+}
+
+.nav-link:hover {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.nav-tabs {
+  border-bottom: 0px;
+}
+
+.nav-logout {
+  margin-top: -2px;
+}
