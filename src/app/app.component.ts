@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LoggingService } from './logging.service';
 import { Store } from '@ngrx/store';
 import * as fromApp from './components/store/app.reducer';
 import * as AuthActions from './authentication/store/auth.actions';
@@ -10,12 +9,8 @@ import * as AuthActions from './authentication/store/auth.actions';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  constructor(
-    private store: Store<fromApp.AppState>,
-    private loggingService: LoggingService
-  ) {}
+  constructor(private store: Store<fromApp.AppState>) {}
   ngOnInit(): void {
     this.store.dispatch(new AuthActions.AutoLogin());
-    this.loggingService.printLog('Hello from AppComponent  ngOnInit');
   }
 }

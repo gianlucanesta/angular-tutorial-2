@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { Observable, Subscription } from 'rxjs';
 import { LoggingService } from '../../logging.service';
@@ -12,7 +12,7 @@ import { Store } from '@ngrx/store';
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.css'],
 })
-export class ShoppingListComponent implements OnInit, OnDestroy {
+export class ShoppingListComponent implements OnInit {
   ingredients!: Observable<{ ingredients: Ingredient[] }>;
   private subscription!: Subscription;
 
@@ -28,14 +28,5 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   onEditItem(index: number) {
     this.store.dispatch(new ShoppingListActions.StartEdit(index));
-  }
-
-  ngOnDestroy(): void {
-    // this.igChangeSub.unsubscribe();
-  }
-
-  onIngredientAdded(ingredient: Ingredient) {
-    // this.ingredients.push(ingredient);
-    // console.log(ingredient);
   }
 }
