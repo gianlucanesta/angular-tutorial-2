@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import {
   FormBuilder,
   FormControl,
@@ -44,9 +44,9 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
-      this.editMode = params['id'] != null;
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.id = +params.get('id')!;
+      this.editMode = params.has('id');
       this.initForm();
     });
   }
